@@ -16,7 +16,9 @@ SPARC		= -march=v8
 WINDOWS		= -DWIN32
 UNIX		= -DUNIX
 
-CFLAGS		= $(I686) $(OPTFLAGS) $(WINDOWS) $(WARNING) -c
+#CFLAGS		= $(I686) $(OPTFLAGS) $(WINDOWS) $(WARNING) -c
+#LFLAGS		= $(I686)
+CFLAGS		= $(I686) $(OPTFLAGS) $(UNIX) $(WARNING) -fPIC -c
 LFLAGS		= $(I686)
 
 OBJS		= coding.o struct_model0.o struct_model1.o
@@ -27,7 +29,8 @@ OBJS_ZZLIB	= $(OBJS) bwt-dll.o block-dll.o
 ZZIP_EXE	= zzip.exe
 MAKE_H_EXE	= make_h.exe
 SFX_EXE		= zzip-sfx.exe
-ZZLIB_DLL	= zzlib.dll
+#ZZLIB_DLL	= zzlib.dll
+ZZLIB_DLL	= zzlib.so
 ZZLIB_A		= libzz.a
 
 all : $(ZZIP_EXE)
@@ -64,7 +67,8 @@ zzipstub.sfx : $(OBJS_SFX)
 	$(MAKE_H_EXE) zzipstub.sfx > sfx_code.h
 
 $(ZZLIB_DLL) : $(OBJS_ZZLIB)
-	$(LD) $(LFLAGS) -shared -Wl,--out-implib,libzzlib.a,--kill-at -o $(ZZLIB_DLL) $(OBJS_ZZLIB)
+	#$(LD) $(LFLAGS) -shared -Wl,--out-implib,libzzlib.a,--kill-at -o $(ZZLIB_DLL) $(OBJS_ZZLIB)
+	$(LD) $(LFLAGS) -shared -Wl,--out-implib,libzzlib.a -o $(ZZLIB_DLL) $(OBJS_ZZLIB)
 	$(STRIP) $(ZZLIB_DLL)
 
 lib : $(OBJS_ZZLIB)
