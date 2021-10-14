@@ -11,12 +11,13 @@ WARNING		= -W -Wall -Wshadow -Wpointer-arith -Winline
 # -fprofile-arcs -fbranch-probabilities
 OPTFLAGS	= -O3 -ffast-math -fforce-addr -fstrict-aliasing -fomit-frame-pointer -foptimize-sibling-calls
 I386		= -march=pentium4 -mtune=pentium4 -malign-double -maccumulate-outgoing-args
+I686		= -march=x86-64 -mtune=generic -malign-double -maccumulate-outgoing-args
 SPARC		= -march=v8
 WINDOWS		= -DWIN32
 UNIX		= -DUNIX
 
-CFLAGS		= $(I386) $(OPTFLAGS) $(WINDOWS) $(WARNING) -c
-LFLAGS		= $(I386)
+CFLAGS		= $(I686) $(OPTFLAGS) $(WINDOWS) $(WARNING) -c
+LFLAGS		= $(I686)
 
 OBJS		= coding.o struct_model0.o struct_model1.o
 OBJS_SFX	= zzipstub.o coding-sfx.o struct_model0-sfx.o struct_model1-sfx.o block-sfx.o
