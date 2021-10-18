@@ -373,7 +373,7 @@ void CmdLineParameters(int  argc,
 			case 'D':
 			case 'd': action = DELETE; argc--; argv++;  break;
 			case 'X':
-			case 'x': with_path = true;
+			case 'x': with_path = true; [[fallthrough]];
 			case 'E':
 			case 'e': action = EXTRACT; argc--; argv++; break;
 			case 'L':
@@ -464,6 +464,7 @@ void DoFiles()
 		strcpy(output_filename, file_list[0]);
 		file_list++;
 		nb_input_file--;
+		[[fallthrough]];
 	case NONE:
 		/* we process readable files only and recurse directories */
 		j = 0;
