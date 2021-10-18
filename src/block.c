@@ -373,7 +373,7 @@ sint32 CompressBlock()
 		mem.buffer8 = (uint8*)MyMalloc(sizeof(uint8) * (len_in + RUN_LENGTH_MAX + 32) * 6);
 		if (last_error != OK) return -1;
 		buffer1 = mem.buffer8;
-		buffer2 = (uint8*)ROUND(buffer1 + len_in * 2);
+		buffer2 = (uint8*)ROUND32(buffer1 + len_in * 2);
 
 		memcpy(buffer1, buffer_in, sizeof(uint8) * len_in);
 		len = len_in;
@@ -387,7 +387,7 @@ sint32 CompressBlock()
 		if (last_error != OK) return -1;
 
 		buffer1 = mem.buffer8;
-		buffer2 = (uint8*)ROUND(buffer1 + taille_max * 2);
+		buffer2 = (uint8*)ROUND32(buffer1 + taille_max * 2);
 
 		FTELL_I(pos);
 		FTELL_O(deb);
@@ -585,9 +585,9 @@ sint32 CompressBlock()
 
 		/*- Beginning ---- Split --------------*/
 
-		buf_out1 = (uint8*)ROUND(buffer1 + len);
-		buffer2  = (uint8*)ROUND(buf_out1 + len);
-		buf_out2 = (uint8*)ROUND(buffer2 + len);
+		buf_out1 = (uint8*)ROUND32(buffer1 + len);
+		buffer2  = (uint8*)ROUND32(buf_out1 + len);
+		buf_out2 = (uint8*)ROUND32(buffer2 + len);
 
 		len2 = Split(buffer1, buffer1 + len, buffer2);
 
@@ -801,8 +801,8 @@ sint32 UncompressBlock(modes mode)
 			mem.buffer8 = (uint8*)MyMalloc(sizeof(uint8) * len_max * 5 + 32 * 2);
 			if (last_error != OK) return -1;
 			bufferout = mem.buffer8;
-			bufferin1 = (uint8*)ROUND(bufferout + len_max);
-			bufferin2 = (uint8*)ROUND(bufferin1 + len_max);
+			bufferin1 = (uint8*)ROUND32(bufferout + len_max);
+			bufferin2 = (uint8*)ROUND32(bufferin1 + len_max);
 			
 			READ_M(&tot2, sizeof(tot2));
 			READ_M(bufferin2, sizeof(uint8) * tot2);
@@ -843,8 +843,8 @@ sint32 UncompressBlock(modes mode)
 			mem.buffer8 = (uint8*)MyMalloc(sizeof(uint8) * len_max * 5 + 32 * 2);
 			if (last_error != OK) return -1;
 			bufferout = mem.buffer8;
-			bufferin1 = (uint8*)ROUND(bufferout + len_max);
-			bufferin2 = (uint8*)ROUND(bufferin1 + len_max);
+			bufferin1 = (uint8*)ROUND32(bufferout + len_max);
+			bufferin2 = (uint8*)ROUND32(bufferin1 + len_max);
 			
 			READ_F(&tot2, sizeof(tot2));
 			READ_F(bufferin2, sizeof(uint8) * tot2);

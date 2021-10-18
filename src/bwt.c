@@ -346,7 +346,7 @@ void BWT_Coding(uint32 len,
 #endif /* GET_STAT */
 
 	p.bufinout = buffer8;
-	b.buffer   = (uint8*)ROUND(buffer8 + (len + RUN_LENGTH_MAX) * sizeof(uint16*));
+	b.buffer   = (uint8*)ROUND32(buffer8 + (len + RUN_LENGTH_MAX) * sizeof(uint16*));
 
 	GET_TSC(p1);
 

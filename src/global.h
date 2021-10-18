@@ -72,7 +72,7 @@
 #define FEATURE_MMX			0x00000020
 #define FEATURE_CMOV		0x00000040
 
-#define ROUND(a)		(((size_t)(a+32))&(~31UL))
+#define ROUND32(a)		(((size_t)(a+32))&(~31ULL))
 
 #define VERBOSE			if (verbose == true)
 
